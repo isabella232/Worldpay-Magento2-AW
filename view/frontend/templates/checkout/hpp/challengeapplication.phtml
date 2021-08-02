@@ -1,0 +1,37 @@
+<?php
+    $data = $block->challengeConfigs();
+    $threeDSecureChallengeConfigUrl = $data['challengeurl']  ;
+?>
+    <!-- An example 3DS2 challenge window size. -->
+    <form name= "iframe_challengeForm" 
+          id="challengeForm"
+          method= "POST"
+          action="<?= /* @noEscape */ $threeDSecureChallengeConfigUrl ?>">
+    <!-- 
+    Use the above Challenge URL for test, we will provide a static Challenge URL for production once you go live 
+    -->
+        <input type = "hidden" name= "JWT" id= "challenge_jwt" value= "" />
+        <input type="hidden" name="url" value="<?= /* @noEscape */ $data['redirectUrl'] ?>" />
+        <!-- Encoding of the JWT above with the secret "worldpaysecret". -->
+        <input type="hidden" name="MD" value="merchantSessionId=<?= /* @noEscape */ $data['challengeReference'] ?>" />
+        <!-- 
+        Extra field for you to pass data in to the challenge that will be included in the post 
+        back to the return URL after challenge complete 
+        -->
+    </form>
+               
+    
+   
+    <script language="Javascript">
+  
+    document.getElementById("challenge_jwt").value = "<?= /* @noEscape */ $data['challengeJwt'] ?>";
+    
+
+    
+    window.onload = function()
+    {
+      // Auto submit form on page load
+      document.getElementById("challengeForm").submit();
+    }
+    </script>
+    

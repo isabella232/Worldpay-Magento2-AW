@@ -1,0 +1,86 @@
+
+<?php $carddeatils = $block->getTokenData() ?>
+<form class="form form-edit-account"
+    action="<?= /* @noEscape */ $block->getUrl("worldpay/savedcard/editPost") ?>"
+    method="post" id="form-validate" enctype="multipart/form-data" autocomplete="off">
+    <fieldset class="fieldset info">
+        <?= /* @noEscape */ $block->getBlockHtml('formkey')?>
+        <legend class="legend"><span><?= /* @noEscape */ $block->getMyAccountLabels('AC8') ?
+                                $block->getMyAccountLabels('AC8') : 'Card Information' ?></span></legend><br>
+
+        <input type="hidden" name="token[id]" value="<?= /* @noEscape */ $carddeatils->getTokenId() ?>" />
+        <input type="hidden" name="token[tokenUrl]" value="<?= /* @noEscape */ $carddeatils->getToken() ?>" />
+        <div class="field card Number">
+            <label class="label" for="card number">
+                <span><?= /* @noEscape */ $block->getMyAccountLabels('AC3') ?
+                                $block->getMyAccountLabels('AC3') : 'Card Number' ?></span>
+            </label>
+            <div class="control">
+                <span><?= /* @noEscape */ $block->escapeHtml($carddeatils->getCardNumber()) ?></span>
+            </div>
+        </div>
+
+        <div class="field card holder name">
+            <label class="label" for="card holder name">
+                <span><?= /* @noEscape */ $block->getMyAccountLabels('AC1') ?
+                                $block->getMyAccountLabels('AC1') : 'Card Holder Name' ?></span>
+            </label>
+            <div class="control">
+                <input type="text" name="token[cardholder_name]" required='true' id="card-holder-name" 
+                       title="<?= /* @noEscape */ $block->getMyAccountLabels('AC1') ?
+                                $block->getMyAccountLabels('AC1') : 'Card Holder Name' ?>"
+                value="<?= /* @noEscape */ $block->escapeHtml($carddeatils->getCardholderName()) ?>"
+                class="input-text required cardholder_name worldpay-cardholdername-length">
+            </div>
+        </div>
+
+        <div class="field card expiry month">
+            <label class="label" for="card holder name">
+                <span><?= /* @noEscape */ $block->getMyAccountLabels('AC9') ?
+                                $block->getMyAccountLabels('AC9') : 'Expiry Month/Year' ?>
+                </span>
+            </label>
+            <div class="fields group group-2">
+                <div class="field no-label month">
+                    <div class="control">
+                        <select id="expiry_month" name="token[card_expiry_month]"
+                        class="month required-entry worldpay-month-included worldpay-month-length worldpay-month-range">
+                        <?php foreach ($block->getMonths() as $k => $v): ?>
+                            <option value="<?= /* @noEscape */ $block->escapeHtml($k) ?>"
+                                <?php if ($k == $carddeatils->getCardExpiryMonth()): ?>
+                            selected<?php endif ?>>
+                            <?= /* @noEscape */ $block->escapeHtml($v) ?></option>
+                        <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="field no-label year">
+                    <div class="control">
+                        <select id="expiry_year" name="token[card_expiry_year]"
+                              class="month required-entry
+                              worldpay-month-included
+                              worldpay-month-length
+                              worldpay-month-range">
+                        <?php foreach ($block->getExpiryYears() as $k => $v): ?>
+                            <option value="<?= /* @noEscape */$block->escapeHtml($k) ?>"
+                                <?php if ($k == $carddeatils->getCardExpiryYear()): ?>
+                            selected<?php endif ?>>
+                            <?= /* @noEscape */ $block->escapeHtml($v) ?></option>
+                        <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="actions-toolbar">
+            <div class="primary">
+                <button type="submit" class="action save primary"
+                        title="<?= /* @noEscape */ $block->getMyAccountLabels('AC13') ?
+                                $block->getMyAccountLabels('AC13') : 'Save' ?>">
+                    <span><?= /* @noEscape */ $block->getMyAccountLabels('AC13') ?
+                                $block->getMyAccountLabels('AC13') : 'Save' ?></span>
+                </button>
+            </div>
+        </div>
+    </fieldset>
+</form>

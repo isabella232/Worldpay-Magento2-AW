@@ -1,0 +1,168 @@
+<div class="payment-method" data-bind="css: {'_active': (getCode() == isChecked())}" afterRender="preparePayment">
+    <div class="payment-method-title field choice">
+        <input type="radio"
+               name="payment[method]"
+               class="radio"
+               data-bind="attr: {'id': getCode()}, value: getCode(), checked: isChecked, click: selectPaymentMethod, visible: isRadioButtonVisible()"/>
+        <label data-bind="attr: {'for': getCode()}" class="label"><span data-bind="text: getTitle()"></span></label>
+        
+         <!-- ko if: ( getCode()=='worldpay_cc')-->
+
+         <div class='accepted_cc'>
+            
+             <span class='worldpay_cc_we_accept'><!-- ko i18n: getCheckoutLabels('CO2')--><!-- /ko --></span>
+             
+             <div class="paymentoptions-icon-wrapper">
+         <!-- ko foreach: {data: getCcAvailableTypesValues(), as: 'item'} -->
+         <!--ko if: $parent.getIcons(item.ccValue) -->
+                        <div data-bind="attr: {for: 'direct_cc_' + item.ccValue}"><img data-bind="attr: {
+                                    'src': $parent.getIcons(item.ccValue).url,
+                                    'alt': item.ccLabel,
+                                    'width': $parent.getIcons(item.ccValue).width,
+                                    'height': $parent.getIcons(item.ccValue).height
+                                    }"></div>
+                    <!--/ko-->
+         <!--/ko-->
+          </div>
+        </div>
+          <!--/ko-->
+          
+          
+    </div>
+<!-- Credit Card Form-->
+
+<div class="payment-method-content">
+    <!-- ko if: (getSaveCardAllowed() && getSavedCardsCount() > 0)-->
+    <div class="paymentmethods-radio-wrapper ">
+    <input type="radio" name="radiobutton" id="new_card"
+           data-bind="checked:useSavedCard()"
+           value="newcard" checked>
+    <label for="new_card"><!-- ko i18n: getCheckoutLabels('CO1')--><!-- /ko --></label>
+    </div>
+    <div class="paymentmethods-radio-wrapper">
+    <input type="radio" name="radiobutton" id="use_saved_card" 
+           data-bind="checked:useSavedCard()" 
+           value="savedcard">
+    <label for="use_saved_card"><!-- ko i18n: getCheckoutLabels('CO13')--><!-- /ko --></label>
+    </div>
+    <!-- /ko -->
+<section class="container websdkField">
+    
+    <section class="card" id="worldpay_cc-newcard-form">
+        <form class="checkout" id="card-form" data-bind="submit: preparePayment">
+            <section class="card__type"></section>
+            
+           
+            <section class="card-name">
+                <input type="text" id="card-name" placeholder="Cardholder Name" 
+                        aria-label="Cardholder Name" aria-invalid="false" 
+                       class="no-outline card__field field websdkInput"> 
+            </section>
+            
+
+            
+            
+            <section id="card-pan" class="card__field card__field--pan websdkInput">
+            </section>
+
+
+            <section class="expiry-cvv" >
+                <section class="first">
+                    
+                    <section id="card-expiry" class="card__field card__field--expiry">
+                    </section>
+                </section>
+                <section class="last">
+                    
+                    <section id="card-cvv" class="card__field card__field--cvv">
+                    </section>
+                </section>
+            </section>
+            
+            <!-- ko if: (getSaveCardAllowed() && (isTokenizationEnabled()))-->
+            <br>
+            <section class="save__card">
+                <input type="checkbox" class="input-check savecard"  name="save-card"  data-bind="checked:resetDisclaimer(),attr: {
+                    id: getCode() + '_save_card', title: $t('Save This Card'),
+                    'data-container': getCode() + '-save-card'}, value: saveMyCard">
+                <label data-bind="attr: {for: getCode() + 'save-card'}" class="card__field--label">
+                    <span><!-- ko i18n: getCheckoutLabels('CO8')--><!-- /ko --></span>
+                    <!-- ko if: (isDisclaimerMessageEnabled())-->
+                        <span>(<a data-bind="click: disclaimerPopup">
+                                <!-- ko i18n: $t(getCheckoutLabels('CO9'))--><!-- /ko --></a>)
+                        </span>
+                    <!-- /ko -->
+                </label>
+            </section>
+            <!-- /ko -->
+            <div data-bind="attr: {title: $t(getCheckoutLabels('CO17'))}" id="dialog" style="display: none" align = "center" title="">
+                <div data-bind="html: disclaimerMessage()"></div>
+            </div>
+            <div class="mage-error" generated="true" id="disclaimer-error"></div>
+            
+           <div id ="errors" style="color:red"></div>
+               
+          <div id ="SessionAlert" style="color:red"></div>
+      
+            <section style="align-content:center;">
+            <button id="card-submit" class="card__submit" type="submit" data-bind="
+                            css: {disabled: !isPlaceOrderActionAllowed()},
+                            enable: (getCode() == isChecked())
+                            "
+                        disabled><!-- ko i18n: $t(getCheckoutLabels('CO10'))--><!-- /ko --></button>
+            </section>
+        </form>
+    </section>
+    <!-- ko if: (getSaveCardAllowed())-->
+    <section class="card" id="worldpay_cc-savedcard-form">
+    <form class="checkout">    
+    <div id="saved-Card-Visibility-Enabled">
+        <fieldset data-bind="attr: {class: 'fieldset payment items ccard ' + getCode(), id: 'payment_form_' + getCode()}">
+        <!-- ko if: (getSavedCardsCount() > 0)-->
+            <h4 class="card__field--label"><!-- ko i18n: (getCheckoutLabels('CO12'))--><!-- /ko --></h4>
+            <!-- ko template: 'Sapient_AccessWorldpay/payment/saved-card-websdk-form' --><!-- /ko -->
+        <!-- /ko -->
+        </fieldset>
+    </div>
+    </form>
+    </section>
+    <!-- /ko -->
+</section>
+
+<script src=window.checkoutConfig.payment.ccform.websdk></script>
+<!-- ko if: (isSavedCardEnabled())-->
+<div style="width: 100%; height:100%;display:inline-block;margin-bottom:20px;margin-top:25px;">
+        <span style="color:red;"><i>*<!-- ko i18n: $t(getCheckoutLabels('CO15'))--><!-- /ko -->
+                </i></span>
+        </div>
+<!--/ko-->
+        
+        <!-- ko foreach: getRegion('messages') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+        <!--/ko-->
+        <div class="payment-method-billing-address">
+            <!-- ko foreach: $parent.getRegion(getBillingAddressFormName()) -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        </div>
+        <div class="checkout-agreements-block">
+            <!-- ko foreach: $parent.getRegion('before-place-order') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        </div>
+<!--        <div class="actions-toolbar">
+            <div class="primary">
+                <button id="checkout-place-order" class="action primary checkout"
+                        type="submit"
+                        data-bind="
+                            click: preparePayment,
+                            attr: {title: $t('Place Order')},
+                            css: {disabled: !isPlaceOrderActionAllowed()},
+                            enable: (getCode() == isChecked())
+                            "
+                        disabled>
+                   <span data-bind="text: $t('Place Order')"></span>
+                </button>
+            </div>-->
+</div>
+        </div>

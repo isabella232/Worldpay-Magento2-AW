@@ -1,0 +1,22 @@
+<?php
+$param = $block->getRequest()->getParams();
+$storeCode = $block->getStoreCode();
+?>
+
+<script type="text/javascript">
+
+    
+    window.is3DSecureEnabled = '<?= /* @noEscape */ $block->is3DSecureEnabled() ?>';
+    window.websdk = '<?= /* @noEscape */ $block->getWebSdkJsPath() ?>';
+    envMode = '<?= /* @noEscape */ $block->getEnvironmentMode()?>';
+    window.MyAccountExceptions = '<?= /* @noEscape */ $block->myAccountExceptions() ?>';
+    window.CreditCardException = '<?= /* @noEscape */ $block->getCreditCardException() ?>';
+    
+    if(envMode == 'Test Mode') {
+        document.cookie = "envMode=Test Mode; path=/";
+    }else{
+        document.cookie = "envMode=Live Mode; path=/";
+    }
+
+</script>
+

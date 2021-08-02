@@ -1,0 +1,18 @@
+<?xml version='1.0'?>
+<config xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='urn:magento:framework:Event/etc/events.xsd'>
+    <event name='controller_action_postdispatch'>
+	<observer name='Sapient\AccessWorldpay\Model\Observer\Rirect' instance='Sapient\AccessWorldpay\Model\Observer\Redirect' />
+    </event>
+    <event name='order_cancel_after'>
+	<observer name='Sapient\AccessWorldpay\Model\Observer\CancelRequest' instance='Sapient\AccessWorldpay\Model\Observer\CancelRequest' />
+    </event>
+<!--    <event name='sales_order_invoice_save_after'>
+	<observer name='Sapient\AccessWorldpay\Model\Observer\CaptureRequest' instance='Sapient\AccessWorldpay\Model\Observer\CaptureRequest' />
+    </event>
+    <event name='sales_order_payment_refund'>
+	<observer name='Sapient\AccessWorldpay\Model\Observer\RefundRequest' instance='Sapient\AccessWorldpay\Model\Observer\RefundRequest' />
+    </event> -->
+<!--    <event name="sales_order_invoice_pay">
+        <observer instance="Sapient\AccessWorldpay\Observer\Backend\Sales\OrderInvoicePay" name="sapient_worldpay_observer_backend_sales_orderinvoicepay_sales_order_invoice_pay"/>
+    </event>-->
+</config>

@@ -1,0 +1,71 @@
+<config>
+    <default>
+        <worldpay>
+             <general_config>
+                <enable_worldpay>0</enable_worldpay>
+                <environment_mode>Test Mode</environment_mode>
+                <test_url>https://try.access.worldpay.com/payments/authorizations</test_url>
+                <enable_logging>0</enable_logging>
+                <payment_method_selection>radio</payment_method_selection>
+                <order_description>WorldPay Order</order_description>
+                <merchant_entity>default</merchant_entity>
+            </general_config>
+            <cc_config>
+                <enabled>1</enabled>
+                <title>Credit Cards</title>
+                <paymentmethods>AMEX-SSL,VISA-SSL,ECMC-SSL</paymentmethods>
+                <require_cvc>1</require_cvc>
+                <integration_mode>direct</integration_mode>
+                <hpp_integration>full_page</hpp_integration>               
+            </cc_config>
+            <order_sync_status>
+                <order_status>pending,processing,canceled,complete</order_status>
+                <order_sync_interval>24</order_sync_interval>
+            </order_sync_status>
+            <wallets_config>
+                <enabled>1</enabled>
+                <title>Wallets</title>
+                <google_pay_wallets_config>
+                    <enabled>1</enabled>
+                    <paymentmethods>AMEX,VISA,DISCOVER,JCB,MASTERCARD</paymentmethods>
+                    <authmethods>PAN_ONLY,CRYPTOGRAM_3DS</authmethods>
+                </google_pay_wallets_config>
+            </wallets_config>
+        </worldpay>
+        <payment>
+            <worldpay_cc>
+                <title>Credit Cards</title>
+                <model>Sapient\AccessWorldpay\Model\PaymentMethods\CreditCards</model>
+                <active>1</active>
+                <allow_specific>0</allow_specific>
+                <payment_action>authorize</payment_action>
+                <sort_order>1</sort_order>
+                <require_cvc>1</require_cvc>
+                <can_authorize_vault>1</can_authorize_vault>
+                <can_capture_vault>1</can_capture_vault>
+            </worldpay_cc>
+            <worldpay_cc_vault>
+                <title>Credit Cards vault</title>
+                <active>1</active>
+                <sort_order>30</sort_order>
+                <payment_action>authorize</payment_action>
+                <model>WorldpayCreditCardVaultFacade</model>
+                <instant_purchase>
+                    <available>Sapient\AccessWorldpay\Model\InstantPurchase\CreditCard\AvailabilityChecker</available>
+                    <tokenFormat>Sapient\AccessWorldpay\Model\InstantPurchase\CreditCard\TokenFormatter</tokenFormat>
+                    <additionalInformation>Sapient\AccessWorldpay\Model\InstantPurchase\PaymentAdditionalInformationProvider</additionalInformation>
+                </instant_purchase>
+                <can_use_for_worldpay_subscription>0</can_use_for_worldpay_subscription>
+            </worldpay_cc_vault> 
+            <worldpay_wallets>
+                <title>Wallets</title>
+                <model>Sapient\AccessWorldpay\Model\PaymentMethods\Wallets</model>
+                <active>1</active>
+                <allow_specific>0</allow_specific>
+                <payment_action>authorize</payment_action>
+                <sort_order>4</sort_order>
+            </worldpay_wallets>
+        </payment>
+        
+    </default>
+</config>

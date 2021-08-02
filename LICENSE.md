@@ -1,0 +1,1 @@
+https://www.fisglobal.com/en-gb/merchant-solutions-worldpay/worldpay-merchant-services-terms-and-conditions-and-associated-documents

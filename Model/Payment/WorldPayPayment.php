@@ -39,9 +39,9 @@ class WorldPayPayment
          $wpp = $this->worldpaypayment->create();
 
         $wpp = $wpp->loadByAccessWorldpayOrderId($paymentState->getOrderCode());
-         if(strtoupper($paymentState->getPaymentStatus()) !== "UNKNOWN") {
+        if (strtoupper($paymentState->getPaymentStatus()) !== "UNKNOWN") {
             $wpp->setData('payment_status', $paymentState->getPaymentStatus());
-         }
+        }
 //        $wpp->setData('card_number', $paymentState->getCardNumber());
 //        $wpp->setData('avs_result', $paymentState->getAvsResultCode());
 //        $wpp->setData('cvc_result', $paymentState->getCvcResultCode());

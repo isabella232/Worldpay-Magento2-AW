@@ -3,7 +3,6 @@
 
 namespace Sapient\AccessWorldpay\Block\Adminhtml\Form\Field;
 
-
 class MyAccountLabels extends \Sapient\AccessWorldpay\Block\Form\Field\FieldArray\CustomLabelsArray
 {
     /**

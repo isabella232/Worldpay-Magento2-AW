@@ -100,10 +100,10 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     }
     public function getMerchantEntityReference()
     {
-       return  $this->_scopeConfig->getValue(
+        return  $this->_scopeConfig->getValue(
             'worldpay/general_config/merchant_entity',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-        ); 
+        );
     }
     public function isMacEnabled()
     {
@@ -540,7 +540,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     }
     
     public function getMyAccountLabels()
-    { 
+    {
                 return $this->_scopeConfig->getValue(
                     'worldpay_custom_labels/my_account_labels/my_account_label',
                     \Magento\Store\Model\ScopeInterface::SCOPE_STORE
@@ -561,7 +561,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     }
     
     public function getCheckoutLabels()
-    { 
+    {
                 return $this->_scopeConfig->getValue(
                     'worldpay_custom_labels/checkout_labels/checkout_label',
                     \Magento\Store\Model\ScopeInterface::SCOPE_STORE
@@ -582,7 +582,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     }
     
     public function getAdminLabels()
-    { 
+    {
                 return $this->_scopeConfig->getValue(
                     'worldpay_custom_labels/admin_labels/admin_label',
                     \Magento\Store\Model\ScopeInterface::SCOPE_STORE

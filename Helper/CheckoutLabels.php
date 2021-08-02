@@ -5,7 +5,7 @@ namespace Sapient\AccessWorldpay\Helper;
 use Magento\Store\Model\Store;
 use Magento\Framework\Serialize\SerializerInterface;
 
-class CheckoutLabels 
+class CheckoutLabels
 {
     
     /**

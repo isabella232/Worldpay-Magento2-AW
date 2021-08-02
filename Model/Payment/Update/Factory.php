@@ -26,7 +26,7 @@ class Factory
      * @return object
      */
     public function create(\Sapient\AccessWorldpay\Model\Payment\State $paymentState)
-    {   
+    {
         switch ($paymentState->getPaymentStatus()) {
             case \Sapient\AccessWorldpay\Model\Payment\State::STATUS_AUTHORISED:
                 return new \Sapient\AccessWorldpay\Model\Payment\Update\Authorised(
@@ -44,12 +44,12 @@ class Factory
             case \Sapient\AccessWorldpay\Model\Payment\State::STATUS_SENT_FOR_SETTLEMENT:
                 $state = \Sapient\AccessWorldpay\Model\Payment\State::STATUS_SENT_FOR_SETTLEMENT;
                 $reference = $paymentState->getJournalReference($state);
-                if(isset($reference) && strtoupper($reference) == 'PARTIAL CAPTURE') {
-                  return new \Sapient\AccessWorldpay\Model\Payment\Update\PartialCaptured(
-                    $paymentState,
-                    $this->worldpaymentmodel,
-                    $this->_configHelper
-                );  
+                if (isset($reference) && strtoupper($reference) == 'PARTIAL CAPTURE') {
+                    return new \Sapient\AccessWorldpay\Model\Payment\Update\PartialCaptured(
+                        $paymentState,
+                        $this->worldpaymentmodel,
+                        $this->_configHelper
+                    );
                 }
                 return new \Sapient\AccessWorldpay\Model\Payment\Update\Captured(
                     $paymentState,

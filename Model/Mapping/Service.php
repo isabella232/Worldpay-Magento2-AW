@@ -583,8 +583,8 @@ class Service
          "email" => $quote->getCustomerEmail(),
          "createdAt" => substr($createdAt, 0, 10),
          "modifiedAt" =>substr($modifiedAt, 0, 10),
-         "firstName" => substr(preg_replace('/\s+/', '', $address['firstName']),0,22),
-         "lastName" => substr(preg_replace('/\s+/', '', $address['lastName']),0,22),
+         "firstName" => substr(preg_replace('/\s+/', '', $address['firstName']), 0, 22),
+         "lastName" => substr(preg_replace('/\s+/', '', $address['lastName']), 0, 22),
          "nameMatchesAccountName" => $address['firstName'] == $shippingAddress['firstName']?
                                     "true":"false"
         ]  ;
@@ -651,7 +651,7 @@ class Service
                 );
             }
         }
-        if(isset($paymentDetails['additional_data']['is_graphql'])) {
+        if (isset($paymentDetails['additional_data']['is_graphql'])) {
             $details['is_graphql'] =1;
             $details['token_url'] = !empty($paymentDetails['additional_data']['tokenUrl'])?$paymentDetails['additional_data']['tokenUrl']:'';
         }

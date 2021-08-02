@@ -27,8 +27,8 @@ class StateJson implements \Sapient\AccessWorldpay\Model\Payment\State
     {
         if (isset($this->_xml->orderCode)) {
             return (string) $this->_xml->orderCode;
-        }else if (isset($this->_xml->eventDetails->transactionReference)) {
-           return (string) $this->_xml->eventDetails->transactionReference; 
+        } elseif (isset($this->_xml->eventDetails->transactionReference)) {
+            return (string) $this->_xml->eventDetails->transactionReference;
         }
     }
 
@@ -51,9 +51,9 @@ class StateJson implements \Sapient\AccessWorldpay\Model\Payment\State
     {
         if (isset($this->_xml->outcome)) {
             return strtoupper($this->_xml->outcome);
-        }else if (isset($this->_xml->lastEvent)) {
+        } elseif (isset($this->_xml->lastEvent)) {
             return strtoupper($this->_xml->lastEvent);
-        }else if (isset($this->_xml->eventDetails->type)) {
+        } elseif (isset($this->_xml->eventDetails->type)) {
             return strtoupper($this->_xml->eventDetails->type);
         }
 
@@ -70,7 +70,7 @@ class StateJson implements \Sapient\AccessWorldpay\Model\Payment\State
         $statusNode = $this->_getStatusNode();
         if (isset($this->_xml->reference)) {
             $reference = $this->_xml->reference;
-        }else if (isset($this->_xml->eventDetails->reference)) {
+        } elseif (isset($this->_xml->eventDetails->reference)) {
             $reference = $this->_xml->eventDetails->reference;
             return $reference->__toString();
         }
@@ -102,20 +102,20 @@ class StateJson implements \Sapient\AccessWorldpay\Model\Payment\State
         return $link->href;
     }
     
-    public function formattedStatusFromEvents($statusNode) 
+    public function formattedStatusFromEvents($statusNode)
     {
-      switch($statusNode){
-          case "SENTFORAUTHORIZATION":
-              return "SENT_FOR_AUTHORIZATION";
-          case "SENTFORSETTLEMENT":
-              return "SENT_FOR_SETTLEMENT";
-          case "SENTFORREFUND":
-              return "SENT_FOR_REFUND";
-          case "REFUNDFAILED":
-              return "REFUND_FAILED";
-          default:
-              return $statusNode;
-      }
+        switch ($statusNode) {
+            case "SENTFORAUTHORIZATION":
+                return "SENT_FOR_AUTHORIZATION";
+            case "SENTFORSETTLEMENT":
+                return "SENT_FOR_SETTLEMENT";
+            case "SENTFORREFUND":
+                return "SENT_FOR_REFUND";
+            case "REFUNDFAILED":
+                return "REFUND_FAILED";
+            default:
+                return $statusNode;
+        }
     }
 
     /**

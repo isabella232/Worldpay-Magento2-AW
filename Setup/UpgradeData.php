@@ -580,18 +580,17 @@ class UpgradeData implements UpgradeDataInterface
             $configModel = $this->configFactory->create(['data' => $configData]);
             $configModel->save();
         }
-
     }
     
     public function convertArrayToString($exceptionValues)
     {
-        $resultArray = [];		
-            foreach ($exceptionValues as $row) {
-                 $payment_type = $row['exception_code'];
-                $rs['exception_messages'] = $row['exception_messages'];
-                $rs['exception_module_messages'] = $row['exception_module_messages'];
-                $resultArray[$payment_type] = $rs;
-             }
+        $resultArray = [];
+        foreach ($exceptionValues as $row) {
+             $payment_type = $row['exception_code'];
+            $rs['exception_messages'] = $row['exception_messages'];
+            $rs['exception_module_messages'] = $row['exception_module_messages'];
+            $resultArray[$payment_type] = $rs;
+        }
         return $this->serializer->serialize($resultArray);
     }
     
@@ -606,5 +605,4 @@ class UpgradeData implements UpgradeDataInterface
         }
          return $this->serializer->serialize($resultArray);
     }
-    
 }

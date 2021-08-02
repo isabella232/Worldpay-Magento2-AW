@@ -101,7 +101,7 @@ class Index extends \Magento\Framework\App\Action\Action
         }
         $this->wplogger->info("inside Notification-->getRawBody");
         $jsonData = json_decode($this->_rawBody, true);
-        $xml = $this->request->_array2xml($jsonData,false);
+        $xml = $this->request->_array2xml($jsonData, false);
 //        $response = $this->directResponse->setResponse($xml);
 //        $response->getXml();
        // $this->wplogger->info(print_r($response->getXml(),true));
@@ -186,6 +186,6 @@ class Index extends \Magento\Framework\App\Action\Action
     
     private function _updateOrderStatus()
     {
-       $this->paymentoperations->updateOrderStatus($this->_order);
+        $this->paymentoperations->updateOrderStatus($this->_order);
     }
 }

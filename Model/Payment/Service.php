@@ -35,7 +35,7 @@ class Service
 
     public function createPaymentUpdateFromWorldPayXml($xml)
     {
-        if(isset($xml->errorName) && $xml->errorName=='entityIsNotConfigured' ) {
+        if (isset($xml->errorName) && $xml->errorName=='entityIsNotConfigured') {
             throw new \Magento\Framework\Exception\LocalizedException(__($xml->message));
         }
         return $this->_getPaymentUpdateFactory()

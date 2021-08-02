@@ -576,8 +576,8 @@ abstract class AbstractMethod extends \Magento\Payment\Model\Method\AbstractMeth
         if (isset($additionalInformation['token']) && !empty($additionalInformation['token'])) {
             $token = $savedToken->loadByTokenCode($additionalInformation['token']);
             return $token ['token'];
-        }elseif(isset($additionalInformation['tokenUrl']) && !empty($additionalInformation['tokenUrl'])) {
-           return $additionalInformation['tokenUrl']; 
+        } elseif (isset($additionalInformation['tokenUrl']) && !empty($additionalInformation['tokenUrl'])) {
+            return $additionalInformation['tokenUrl'];
         }
         return '';
     }
@@ -617,20 +617,19 @@ abstract class AbstractMethod extends \Magento\Payment\Model\Method\AbstractMeth
     {
         $additional_data = $payment->getAdditionalInformation();
         $cc_type = 'CARD-SSL';
-        if ($payment->getMethod()=='worldpay_cc'){
-            if(!empty($additional_data['cc_number'])) {
-            $cc_type = $this->worlpayhelper->getCardType($additional_data['cc_number']);
-            }
-            elseif(!empty($additional_data['token']) || !empty($additional_data['tokenId'])){
+        if ($payment->getMethod()=='worldpay_cc') {
+            if (!empty($additional_data['cc_number'])) {
+                $cc_type = $this->worlpayhelper->getCardType($additional_data['cc_number']);
+            } elseif (!empty($additional_data['token']) || !empty($additional_data['tokenId'])) {
                 $tokenId = !empty($additional_data['token']) ? $additional_data['token'] : $additional_data['tokenId'];
                 $tokenData = $this->worlpayhelper->getSelectedSavedCardTokenData($tokenId);
                 $cc_type = $tokenData[0]['card_brand'].'-SSL';
-            }elseif(!empty($additional_data['tokenUrl'])) {
+            } elseif (!empty($additional_data['tokenUrl'])) {
                 $getTokenBrandDetails = $this->paymentservicerequest->getDetailedTokenForBrand(
-                        $additional_data['tokenUrl'],
-                        $this->worlpayhelper->getXmlUsername(),
-                        $this->worlpayhelper->getXmlPassword()
-                    );
+                    $additional_data['tokenUrl'],
+                    $this->worlpayhelper->getXmlUsername(),
+                    $this->worlpayhelper->getXmlPassword()
+                );
                 $brandResponse = json_decode($getTokenBrandDetails, true);
                     $cc_type = $brandResponse['paymentInstrument']['brand'].'-SSL';
             }
@@ -641,8 +640,8 @@ abstract class AbstractMethod extends \Magento\Payment\Model\Method\AbstractMeth
     
     public function checkIfStoredSavedCard($additionalInformation)
     {
-        if(!empty($additionalInformation['tokenId'])) {
-           return true; 
+        if (!empty($additionalInformation['tokenId'])) {
+            return true;
         }
         return false;
     }

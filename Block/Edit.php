@@ -3,7 +3,9 @@
  * @copyright 2017 Sapient
  */
 namespace Sapient\AccessWorldpay\Block;
+
 use Magento\Framework\Serialize\SerializerInterface;
+
 class Edit extends \Magento\Framework\View\Element\Template
 {
     /**
@@ -11,8 +13,8 @@ class Edit extends \Magento\Framework\View\Element\Template
      */
     protected $_savecard;
     /**
-      * @var SerializerInterface
-      */
+     * @var SerializerInterface
+     */
     private $serializer;
      /**
       * @var \Magento\Customer\Model\Session
@@ -41,7 +43,7 @@ class Edit extends \Magento\Framework\View\Element\Template
         \Sapient\AccessWorldpay\Model\SavedTokenFactory $savecard,
         \Magento\Customer\Model\Session $customerSession,
         \Sapient\AccessWorldpay\Helper\Data $worldpayHelper,
-	SerializerInterface $serializer,
+        SerializerInterface $serializer,
         array $data = []
     ) {
         $this->_savecard = $savecard;

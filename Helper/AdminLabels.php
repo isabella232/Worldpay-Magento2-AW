@@ -6,7 +6,7 @@ namespace Sapient\AccessWorldpay\Helper;
 use Magento\Store\Model\Store;
 use Magento\Framework\Serialize\SerializerInterface;
 
-class AdminLabels 
+class AdminLabels
 {
     /**
      * Core store config
@@ -212,5 +212,4 @@ class AdminLabels
             }
         }
     }
-    
 }

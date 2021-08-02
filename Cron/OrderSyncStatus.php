@@ -10,7 +10,8 @@ use Exception;
 /**
  * Model for order sync status based on configuration set by admin
  */
-class OrderSyncStatus {
+class OrderSyncStatus
+{
     /**
      *
      * @var \Sapient\AccessWorldpay\Logger\AccessWorldpayLogger
@@ -27,7 +28,7 @@ class OrderSyncStatus {
     
     /**
      * Constructor
-     * 
+     *
      * @param JsonFactory $resultJsonFactory
      * @param \Sapient\AccessWorldpay\Logger\AccessWorldpayLogger $wplogger
      * @param \Magento\Sales\Model\ResourceModel\Order\CollectionFactory $orderCollectionFactory
@@ -158,6 +159,6 @@ class OrderSyncStatus {
     
     private function _updateOrderStatus()
     {
-       $this->paymentoperations->updateOrderStatus($this->_order);
+        $this->paymentoperations->updateOrderStatus($this->_order);
     }
 }

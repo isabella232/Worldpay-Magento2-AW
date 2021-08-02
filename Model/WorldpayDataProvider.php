@@ -58,14 +58,14 @@ class WorldpayDataProvider implements AdditionalDataProviderInterface
                 __($this->worldpayHelper->getCreditCardSpecificexception('GCCAM0'))
             );
         }
-        if($this->worldpayHelper->getCcIntegrationMode() =='web_sdk' 
-                && !empty($data[self::PATH_ADDITIONAL_DATA]['cc_number']))   {
+        if ($this->worldpayHelper->getCcIntegrationMode() =='web_sdk'
+                && !empty($data[self::PATH_ADDITIONAL_DATA]['cc_number'])) {
             $exceptionMessage = $this->worldpayHelper->getCreditCardSpecificexception('GCCAM10')?
                     $this->worldpayHelper->getCreditCardSpecificexception('GCCAM10'):
                 'Invalid Data passed for AccessCheckout(WebSDK) integration. Please refer user guide for configuration for WebSDK';
-           throw new GraphQlInputException(
+            throw new GraphQlInputException(
                 __($exceptionMessage)
-            ); 
+            );
         }
         if ($this->getIsCardValidationRequired($data)
             && isset($data[self::PATH_ADDITIONAL_DATA]['cc_name'])

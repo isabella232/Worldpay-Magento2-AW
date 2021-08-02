@@ -1,0 +1,302 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="worldpay" translate="label" type="text" sortOrder="401" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Access Worldpay</label>
+            <tab>sales</tab>
+            <resource>Sapient_AccessWorldpay::config_worldpay</resource>
+            <!--general configuration-->
+            <group id="general_config" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Configuration</label>
+                <field id="enable_worldpay" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable AccessWorldpay</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="environment_mode" translate="label" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Environment Mode</label>
+                    <source_model>Sapient\AccessWorldpay\Model\Config\Source\EnvironmentMode</source_model>
+                </field>
+                <field id="test_url" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Test URL</label>
+                </field>
+                <field id="live_url" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Live URL</label>
+                </field>
+                <field id="merchant_code" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Merchant Code</label>
+                    <validate>required-entry</validate>
+                    <depends><field id="enabled">1</field></depends>
+                </field>
+                <field id="xml_username" translate="label" type="text" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Username</label>
+                    <validate>required-entry</validate>
+                    <depends><field id="enabled">1</field></depends>
+                </field>
+                <field id="xml_password" translate="label" type="password" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Password</label>
+                    <validate>required-entry</validate>
+                    <depends><field id="enabled">1</field></depends>
+                </field>
+                <field id="merchant_entity" translate="label" type="text" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Merchant Entity Reference</label>
+                    <validate>required-entry</validate>    
+                    <comment><![CDATA[
+                            <ul style="margin-left: 2em;">
+                            <li><small>Value default is applicable for test environment.</small></li>
+                            <li><small>To get your production `entity reference` contact your Worldpay Implementation Manager</small></li>
+                            </ul>
+                        ]]>
+                    </comment>                                    
+                </field>
+                <field id="merchant_identity" translate="label" type="text" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>AccessCheckout Identity</label>
+                    <validate>required-entry</validate>
+                    <depends><field id="enabled">1</field></depends>
+                     <comment>
+                         <![CDATA[
+                            <ul style="margin-left: 2em;">
+                            <li><small>Please reach out to your Worldpay contact to get Access Checkout Identity.</small></li>
+                            <li><small>This is mandatory field for all credit card payments.</small></li>
+                            </ul>
+                        ]]>
+                    </comment>
+                </field>
+                <field id="enable_logging" translate="label" type="select" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled Logging</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                
+               
+                <field id="order_description" translate="label" type="textarea" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Description</label>                                        
+                </field>
+            </group>
+            <!--Credit Card-->
+            <group id="cc_config" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Credit Cards</label>
+                <field id="enabled" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="integration_mode" translate="label" type="select" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Integration Mode</label>
+                    <source_model>Sapient\AccessWorldpay\Model\Config\Source\IntegrationMode</source_model>
+                </field>
+                <field id="test_websdk_url" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Test WebSDK Url</label>
+                    <comment>Please enter the SDK path provided by Worldpay</comment>
+                </field>
+                <field id="live_websdk_url" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Live WebSDK Url</label>
+                    <comment>Please enter the SDK path provided by Worldpay</comment>
+                </field>
+                <field id="paymentmethods" translate="label" type="multiselect" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Payment Methods</label>
+                    <source_model>Sapient\AccessWorldpay\Model\Config\Source\PaymentMethodsCC</source_model>
+                    <comment>Diners and Dankort are not supported currently by Worldpay.</comment>
+                </field>
+                <field id="title" translate="label" type="text" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Title</label>
+                </field>
+               <field id="saved_card" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Save Card</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+<!--                <field id="verified_tokenization" translate="label" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Verified Tokenization</label>
+                    <depends><field id="saved_card">1</field></depends>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>-->
+                <field id="require_cvc" translate="label" type="select" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Require CVC</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <group id="configure_disclaimer" translate="label" type="text" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Configure Disclaimer</label>
+                    <field id="stored_credentials_disclaimer_message" translate="label comment" sortOrder="1" type="editor" showInStore="1" showInDefault="1" showInWebsite="1" >
+                        <label>Disclaimer Message</label>
+                        <frontend_model>Sapient\AccessWorldpay\Block\Adminhtml\System\Config\Editor</frontend_model>
+                    </field>
+                    <field id="stored_credentials_message_enable" translate="label" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Show Disclaimer in Store Front</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="stored_credentials_flag" translate="label" type="select" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Important Disclaimer Mandatory</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>                    
+                </group>
+            </group>
+             <!--Credit Card 3DS-->
+            <group id="3ds_config" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Credit Card 3DS Authentication</label>
+                <field id="do_3Dsecure" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Activate 3DS Authentication</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="challenge_window_size" translate="label" type="select" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Challenge Window Type</label>
+                    <depends><field id="enable_dynamic3DS2">1</field></depends>
+                    <source_model>Sapient\AccessWorldpay\Model\Config\Source\ChallengeWindowSize</source_model>
+                </field>
+            </group>
+              <!-- Instant Purchase with Worldpay -->
+            <group id="quick_checkout_config" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Instant Purchase with Worldpay</label>                
+                <field id="instant_purchase" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Instant Page Checkout</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>If set to "Yes", Worldpay as payment method will be available during Instant purchase.</comment>
+                </field>
+            </group>  
+          
+           <group id="wallets_config" translate="label" type="text" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Mobile Wallets</label>
+                <field id="enabled" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="title" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Title</label>
+                </field>
+                <!--GooglePay Wallet Configurations -->
+                <group id="google_pay_wallets_config" translate="label" showInDefault="1" showInWebsite="1" sortOrder="90">
+                    <label>Google Pay</label>
+                    <!--Google Pay  enabled-->
+                    <field id="enabled" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enabled</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="paymentmethods" translate="label" type="multiselect" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Payment Methods</label>
+                        <source_model>Sapient\AccessWorldpay\Model\Config\Source\PaymentMethods</source_model>
+                    </field>
+                    <field id="authmethods" translate="label" type="multiselect" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Authentication Methods Supported By Google</label>
+                        <source_model>Sapient\AccessWorldpay\Model\Config\Source\AuthMethods</source_model>
+                    </field>
+                    <field id="gateway_merchantname" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Gateway Name</label>
+                        <comment>For this detail, You must connect with your Worldpay contact.</comment>
+                    </field> 
+                    <field id="gateway_merchantid" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Gateway MerchantId</label>
+                        <comment>For this detail, You must connect with your Worldpay contact.</comment>
+                    </field> 
+                     <field id="google_merchantid" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Google MerchantId</label>
+                        <comment>This field only required for production mode. This can be generated from merchant's Google account</comment>
+                    </field> 
+                     <field id="google_merchantname" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Google MerchantName</label>
+                    </field> 
+                </group>
+                
+                <!-- Apple Pay Configuration -->
+                
+                <group id="apple_pay_wallets_config" translate="label" showInDefault="1" showInWebsite="1" sortOrder="3">
+                    <label>Apple Pay</label>
+                    <!--Apple Pay  enabled-->
+                    <field id="enabled" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enabled</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                     <field id="certification_key" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Apple Pay Certification Key</label>
+                        <comment>Location of the ApplePay.key.pem. eg. /var/www/html/cert/.  Files should be have read access by the webserver</comment>
+                    </field> 
+                     <field id="certification_crt" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Apple Pay Certification Path</label>
+                        <comment>Location of the ApplePay.crt.pem. eg. /var/www/html/cert/.  Files should be have read access by the webserver</comment>
+                    </field> 
+                    <field id="certification_password" translate="label" type="password" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Apple Pay Certification Password</label>
+                        <comment>Password set during the export of p12 file.</comment>
+                    </field>
+                    <field id="merchant_name" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Merchant Name</label>
+                        <comment>For this detail, You must connect with your Worldpay contact.</comment>
+                    </field>
+                    <field id="domain_name" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Domain Name</label>
+                        <comment>eg. mydomain.com</comment>
+                    </field>
+                </group>
+                
+            </group>
+            <!-- Synchronize Order Status -->
+            <group id="order_sync_status" translate="label" type="text" sortOrder="16" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Synchronize Order Status</label>
+                <field id="order_status" translate="label" type="multiselect" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Sync Order With Status</label>
+                    <source_model>Sapient\AccessWorldpay\Model\Config\Source\OrderStatus</source_model>
+                </field>
+                <field id="order_sync_interval" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Time window</label>
+                    <comment>Orders placed within the entered hours will be considered for synchronization.</comment>
+                </field>
+            </group>
+        </section>
+        
+        <!-- New Tab for Worldpay exceptions -->
+        <section id="worldpay_exceptions" translate="label" type="text" sortOrder="402" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>AccessWorldpay Exception Codes</label>
+            <tab>sales</tab>
+            <resource>Sapient_AccessWorldpay::config_worldpay_exceptions</resource>
+            <group id="my_account_alert_codes" translate="label" type="select" showInStore="1" showInDefault="1" showInWebsite="1" sortOrder="1">
+                <label>Customize Account Level Messages</label>
+                <field id="response_codes" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1" >
+                    <label>Configurable Alert Messages</label>
+                    <frontend_model>Sapient\AccessWorldpay\Block\Adminhtml\Form\Field\MyAccountException</frontend_model>
+                    <backend_model>Sapient\AccessWorldpay\Model\System\Config\Backend\MyAccountException</backend_model>
+                </field>
+            </group>
+            <group id="adminexceptions" translate="label" type="select" showInStore="1" showInDefault="1" showInWebsite="1" sortOrder="2">
+                <label>Customize Admin AccessWorldpay Configuration Messages</label>
+                <field id="general_exception" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1" >
+                    <label>Configurable Alert Messages</label>
+                    <frontend_model>Sapient\AccessWorldpay\Block\Adminhtml\Form\Field\GeneralException</frontend_model>
+                    <backend_model>Sapient\AccessWorldpay\Model\System\Config\Backend\GeneralException</backend_model>
+                </field>
+            </group>
+            <group id="ccexceptions" translate="label" type="select" showInStore="1" showInDefault="1" showInWebsite="1" sortOrder="3">
+                <label>Customize Checkout Messages</label>
+                <field id="cc_exception" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1" >
+                    <label>Configurable Alert Messages</label>
+                    <frontend_model>Sapient\AccessWorldpay\Block\Adminhtml\Form\Field\CreditCardException</frontend_model>
+                    <backend_model>Sapient\AccessWorldpay\Model\System\Config\Backend\CreditCardException</backend_model>
+                </field>
+            </group>
+        </section>
+        <!-- New Tab for Worldpay Custom Labels -->
+        <section id="worldpay_custom_labels" translate="label" type="text" sortOrder="403" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>AccessWorldpay Custom Labels</label>
+            <tab>sales</tab>
+            <resource>Sapient_AccessWorldpay::config_worldpay_custom_labels</resource>
+            <group id="checkout_labels" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Checkout Labels</label>
+                <field id="checkout_label" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1" >
+                    <label>Checkout Label</label>
+                    <frontend_model>Sapient\AccessWorldpay\Block\Adminhtml\Form\Field\CheckoutLabels</frontend_model>
+                    <backend_model>Sapient\AccessWorldpay\Model\System\Config\Backend\CheckoutLabels</backend_model>
+                </field>
+            </group>
+            <group id="my_account_labels" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>My Account Labels</label>
+                <field id="my_account_label" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1" >
+                    <label>My Account Label</label>
+                    <frontend_model>Sapient\AccessWorldpay\Block\Adminhtml\Form\Field\MyAccountLabels</frontend_model>
+                    <backend_model>Sapient\AccessWorldpay\Model\System\Config\Backend\MyAccountLabels</backend_model>
+                </field>
+            </group>
+            <group id="admin_labels" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Admin Labels</label>
+                <field id="admin_label" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1" >
+                    <label>Admin Label</label>
+                    <frontend_model>Sapient\AccessWorldpay\Block\Adminhtml\Form\Field\AdminLabels</frontend_model>
+                    <backend_model>Sapient\AccessWorldpay\Model\System\Config\Backend\AdminLabels</backend_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

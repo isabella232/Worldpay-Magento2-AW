@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="Sapient_AccessWorldpay::config_worldpay" title="Extension worldpay" sortOrder="50" />
+                            <resource id="Sapient_AccessWorldpay::config_worldpay_exceptions" title="Exception worldpay" sortOrder="60" />
+			    <resource id="Sapient_AccessWorldpay::config_worldpay_custom_labels" title="Extension worldpay custom labels" sortOrder="70" />
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

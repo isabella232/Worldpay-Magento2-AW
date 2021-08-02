@@ -7,13 +7,13 @@ namespace Sapient\AccessWorldpay\Helper;
 use Magento\Store\Model\Store;
 use Magento\Framework\Serialize\SerializerInterface;
 
-class MyAccountLabels 
+class MyAccountLabels
 {
      /**
-     * Core store config
-     *
-     * @var \Magento\Framework\App\Config\ScopeConfigInterface
-     */
+      * Core store config
+      *
+      * @var \Magento\Framework\App\Config\ScopeConfigInterface
+      */
     protected $scopeConfig;
 
     /**

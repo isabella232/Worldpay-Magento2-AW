@@ -2,7 +2,6 @@
 
 namespace Sapient\AccessWorldpay\Block\Adminhtml\Form\Field;
 
-
 class AdminLabels extends \Sapient\AccessWorldpay\Block\Form\Field\FieldArray\CustomLabelsArray
 {
   
@@ -30,5 +29,5 @@ class AdminLabels extends \Sapient\AccessWorldpay\Block\Form\Field\FieldArray\Cu
 
         $this->_addAfter = false;
         $this->_addButtonLabel = __('Add');
-    }  
+    }
 }

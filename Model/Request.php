@@ -196,6 +196,7 @@ class Request
         *
         */
         
+        // @codingStandardsIgnoreStart
         $request = $this->_getRequest();
         $logger = $this->_wplogger;
         if (!$url) {
@@ -264,7 +265,7 @@ class Request
                 '########### END OF REQUEST - FAILURE WHILST TRYING TO SEND REQUEST ###########'
             );
             throw new \Magento\Framework\Exception\LocalizedException(
-               __( 'AccessWorldpay api service not available')
+                __('AccessWorldpay api service not available')
             );
         }
         $request->close();
@@ -295,6 +296,7 @@ class Request
             );
         }
         return $xml;
+        // @codingStandardsIgnoreEnd
     }
     
     public function sendDdcRequest($orderCode, $username, $password, $url, $quote = null)
@@ -348,7 +350,7 @@ class Request
                 '########### END OF REQUEST - FAILURE WHILST TRYING TO SEND REQUEST ###########'
             );
             throw new \Magento\Framework\Exception\LocalizedException(
-               __( 'AccessWorldpay api service not available')
+                __('AccessWorldpay api service not available')
             );
         }
         $request->close();
@@ -512,6 +514,7 @@ class Request
     //get detailed verified token
     public function getDetailedVerifiedToken($verifiedToken, $username, $password)
     {
+        // @codingStandardsIgnoreStart
         $logger = $this->_wplogger;
         $curl = curl_init();
 
@@ -537,18 +540,20 @@ class Request
                 '########### END OF REQUEST - FAILURE WHILST TRYING TO SEND REQUEST ###########'
             );
             throw new \Magento\Framework\Exception\LocalizedException(
-               __( 'AccessWorldpay api service not available')
+                __('AccessWorldpay api service not available')
             );
         }
         $logger->info('Request successfully sent for Detailed Verified Tokenisation ..........');
         $logger->info($response);
         
         return $response;
+        // @codingStandardsIgnoreEnd
     }
     
     //get token details for brand
     public function getDetailedTokenForBrand($verifiedToken, $username, $password)
     {
+        // @codingStandardsIgnoreStart
         $logger = $this->_wplogger;
         $curl = curl_init();
 
@@ -574,18 +579,20 @@ class Request
                 '########### END OF REQUEST - FAILURE WHILST TRYING TO SEND REQUEST ###########'
             );
             throw new \Magento\Framework\Exception\LocalizedException(
-               __( 'AccessWorldpay api service not available')
+                __('AccessWorldpay api service not available')
             );
         }
         $logger->info('Request successfully sent for Detailed Token ........................');
         $logger->info($response);
         
         return $response;
+        // @codingStandardsIgnoreEnd
     }
    
     //get detailed verified token
     public function getTokenInquiry($verifiedToken, $username, $password)
     {
+        // @codingStandardsIgnoreStart
         $logger = $this->_wplogger;
         $curl = curl_init();
         curl_setopt_array($curl, [
@@ -612,17 +619,19 @@ class Request
                 '########### END OF REQUEST - FAILURE WHILST TRYING TO SEND REQUEST ###########'
             );
             throw new \Magento\Framework\Exception\LocalizedException(
-               __( 'AccessWorldpay api service not available')
+                __('AccessWorldpay api service not available')
             );
         }
 
         $logger->info('Request successfully sent for getTokenInquiry from My Account................');
         $logger->info($response);
         return $response;
+        // @codingStandardsIgnoreEnd
     }
     
     public function getTokenDelete($deleteTokenUrl, $username, $password)
     {
+        // @codingStandardsIgnoreStart
         $logger = $this->_wplogger;
         $logger->info($deleteTokenUrl);
         $ch = curl_init();
@@ -643,6 +652,7 @@ class Request
         $logger->info('Request successfully sent for delete token ........................');
         curl_close($ch);
         return $httpcode;
+        // @codingStandardsIgnoreEnd
     }
     /**
      * Censors sensitive data before outputting to the log file
@@ -688,6 +698,7 @@ class Request
       */
     public function putRequest($username, $password, $url, $quote = null)
     {
+        // @codingStandardsIgnoreStart
         $logger = $this->_wplogger;
         $logger->info('Setting destination URL: ' . $url);
         $logger->info('Initialising request');
@@ -738,7 +749,7 @@ class Request
                 '########### END OF REQUEST - FAILURE WHILST TRYING TO PUT REQUEST ###########'
             );
             throw new \Magento\Framework\Exception\LocalizedException(
-              __(  'AccessWorldpay api service not available for put request')
+                __('AccessWorldpay api service not available for put request')
             );
         }
         $request->close();
@@ -761,6 +772,7 @@ class Request
         $jsonData = json_decode($body, true);
         $xml = $this->_array2xml($jsonData, false);
         return $xml;
+        // @codingStandardsIgnoreEnd
     }
     
     public function _array2xml($array, $xml = false, $orderCode = null)
@@ -825,6 +837,7 @@ class Request
      */
     public function getConflictDetails($username, $password, $url)
     {
+        // @codingStandardsIgnoreStart
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
@@ -847,6 +860,7 @@ class Request
         $verifiedTokenResponseToArray['response_code']=$httpCode;
         $body = json_encode($verifiedTokenResponseToArray, true);
         return $body;
+        // @codingStandardsIgnoreEnd
     }
 
     /**
@@ -854,6 +868,7 @@ class Request
      */
     public function resolveConflictData($username, $password, $url, $data)
     {
+        // @codingStandardsIgnoreStart
         $this->_wplogger->info('Conflict Data'.$data);
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -872,6 +887,7 @@ class Request
         $result = curl_exec($ch);
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         return $httpCode;
+        // @codingStandardsIgnoreEnd
     }
     
     public function sendSavedCardCardOnFileVerificationRequest(
@@ -881,6 +897,7 @@ class Request
         $url,
         $quote = null
     ) {
+        // @codingStandardsIgnoreStart
         $request = $this->_getRequest();
         $logger = $this->_wplogger;
         if (!$url) {
@@ -923,7 +940,7 @@ class Request
                 '########### END OF REQUEST - FAILURE WHILST TRYING TO SEND REQUEST ###########'
             );
             throw new \Magento\Framework\Exception\LocalizedException(
-               __( 'AccessWorldpay api service not available')
+                __('AccessWorldpay api service not available')
             );
         }
         $request->close();
@@ -943,6 +960,7 @@ class Request
                 $this->helper->setAccessWorldpayAuthCookie($match[1]);
         }
         return $body;
+        // @codingStandardsIgnoreEnd
     }
     
          /**
@@ -956,6 +974,7 @@ class Request
           */
     public function savedCardSendRequest($orderCode, $username, $password, $url, $quote = null)
     {
+        // @codingStandardsIgnoreStart
         $request = $this->_getRequest();
         $logger = $this->_wplogger;
         if (!$url) {
@@ -1027,11 +1046,12 @@ class Request
         
         $jsonData = json_decode($body, true);
         return $jsonData;
+        // @codingStandardsIgnoreEnd
     }
 
     public function sendGooglePayRequest($orderCode, $username, $password, $url, $quote = null)
     {
-    
+    // @codingStandardsIgnoreStart
         $request = $this->_getRequest();
         $logger = $this->_wplogger;
         if (!$url) {
@@ -1098,7 +1118,7 @@ class Request
                 '########### END OF REQUEST - FAILURE WHILST TRYING TO SEND REQUEST ###########'
             );
             throw new \Magento\Framework\Exception\LocalizedException(
-               __( 'AccessWorldpay api service not available')
+                __('AccessWorldpay api service not available')
             );
         }
         $request->close();
@@ -1129,20 +1149,21 @@ class Request
             );
         }
         return $xml;
+        // @codingStandardsIgnoreEnd
     }
     
     /**
-      * Process the request
-      *
-      * @param $quote
-      * @param $username
-      * @param $password
-      * @return SimpleXMLElement body
-      * @throws Exception
-      */
+     * Process the request
+     *
+     * @param $quote
+     * @param $username
+     * @param $password
+     * @return SimpleXMLElement body
+     * @throws Exception
+     */
     public function sendEventRequest($orderCode, $username, $password, $url, $quote = null)
     {
-       
+       // @codingStandardsIgnoreStart
         $logger = $this->_wplogger;
         $logger->info('Setting destination URL: ' . $url);
         $logger->info('Initialising request');
@@ -1172,7 +1193,7 @@ class Request
             $logger->info(
                 '########### END OF REQUEST - FAILURE WHILST TRYING TO SEND REQUEST ###########'
             );
-            throw new \Magento\Framework\Exception\LocalizedException (
+            throw new \Magento\Framework\Exception\LocalizedException(
                 __('AccessWorldpay api service not available')
             );
         }
@@ -1203,6 +1224,6 @@ class Request
             );
         }
         return $xml;
+        // @codingStandardsIgnoreEnd
     }
-    
 }

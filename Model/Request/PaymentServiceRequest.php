@@ -261,8 +261,8 @@ class PaymentServiceRequest extends \Magento\Framework\DataObject
                 $directOrderParams['orderCode']
             );
             //add check for Graphql
-            if(!isset($directOrderParams['is_graphql'])) {
-            $this->customerSession->setUsedSavedCard(true);
+            if (!isset($directOrderParams['is_graphql'])) {
+                $this->customerSession->setUsedSavedCard(true);
             }
             return $xml;
         } else {
@@ -282,12 +282,12 @@ class PaymentServiceRequest extends \Magento\Framework\DataObject
             'threeDSecureConfig' => $directOrderParams['threeDSecureConfig']
         ];
        //checkGraphQl, !empty(token_url),!used_savedcard
-        if(isset($directOrderParams['paymentDetails']['is_graphql']) 
+        if (isset($directOrderParams['paymentDetails']['is_graphql'])
                 && !empty($directOrderParams['paymentDetails']['token_url'] && !$this->worldpayhelper->is3DSecureEnabled())
                 ) {
             $directOrderParams['paymentDetails']['verifiedToken']= $directOrderParams['paymentDetails']['token_url'];
             return $this->sendWebsdkTokenOrder($directOrderParams);
-        }elseif (isset($directOrderParams['paymentDetails']['tokenId'])) {
+        } elseif (isset($directOrderParams['paymentDetails']['tokenId'])) {
             if (isset($directOrderParams['paymentDetails']['cvcHref'])
                 && !empty($directOrderParams['paymentDetails']['cvcHref'])) {
                 return $this->_sendWebSdkSavedCardRequest($directOrderParams, $customerId);
@@ -1599,17 +1599,17 @@ class PaymentServiceRequest extends \Magento\Framework\DataObject
     
     public function eventInquiry($orderid)
     {
-       if ($this->worldpayhelper->isWorldPayEnable()) {
-          $collectionData = $this->omsCollectionFactory->create()
+        if ($this->worldpayhelper->isWorldPayEnable()) {
+            $collectionData = $this->omsCollectionFactory->create()
                     ->addFieldToSelect(['awp_order_code','awp_events_param'])
                     ->addFieldToFilter('order_increment_id', ['eq' => $orderid ]);
                 $collectionData = $collectionData->getData();
             if ($collectionData) {
                 $eventUrl = $collectionData[0]['awp_events_param'];
-            }else {
+            } else {
                 throw new \Magento\Framework\Exception\LocalizedException(
-            __('No available event link found to synchronize the status')
-        );
+                    __('No available event link found to synchronize the status')
+                );
             }
             
             $orderCode = $collectionData[0]['awp_order_code'];
@@ -1619,12 +1619,17 @@ class PaymentServiceRequest extends \Magento\Framework\DataObject
                 . $orderCode . ' ##########'
             );
             
-            $xml = $this->_request->sendEventRequest($orderCode,$this->worldpayhelper->getXmlUsername(),
-                $this->worldpayhelper->getXmlPassword(),$eventUrl,null);
+             $xml = $this->_request->sendEventRequest(
+                 $orderCode,
+                 $this->worldpayhelper->getXmlUsername(),
+                 $this->worldpayhelper->getXmlPassword(),
+                 $eventUrl,
+                 null
+             );
             
-            return $xml;
-       } 
-       throw new \Magento\Framework\Exception\LocalizedException(
+             return $xml;
+        }
+        throw new \Magento\Framework\Exception\LocalizedException(
             __('Access Worldpay Service Not Available')
         );
     }

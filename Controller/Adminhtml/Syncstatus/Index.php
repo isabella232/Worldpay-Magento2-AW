@@ -118,6 +118,6 @@ class Index extends \Magento\Backend\App\Action
     
     private function _updateOrderStatus()
     {
-       $this->paymentoperations->updateOrderStatus($this->_order);
+        $this->paymentoperations->updateOrderStatus($this->_order);
     }
 }

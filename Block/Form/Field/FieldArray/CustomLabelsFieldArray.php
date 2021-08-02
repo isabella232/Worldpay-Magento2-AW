@@ -5,8 +5,8 @@ namespace Sapient\AccessWorldpay\Block\Form\Field\FieldArray;
 class CustomLabelsFieldArray extends \Magento\Config\Block\System\Config\Form\Field\FieldArray\AbstractFieldArray
 {
     /**
-    * @var string
-    */
+     * @var string
+     */
     protected $_template = 'Sapient_AccessWorldpay::form/field/customlabelarray.phtml';
     
     /**

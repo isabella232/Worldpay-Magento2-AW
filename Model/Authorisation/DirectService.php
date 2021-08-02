@@ -46,7 +46,7 @@ class DirectService extends \Magento\Framework\DataObject
         $paymentDetails,
         $payment
     ) {
-        if (isset($paymentDetails['additional_data']['is_graphql']) 
+        if (isset($paymentDetails['additional_data']['is_graphql'])
             && (empty($paymentDetails['additional_data']['tokenId'])
                 && empty($paymentDetails['token_url']))) {
             $orderParams = [];
@@ -99,7 +99,7 @@ class DirectService extends \Magento\Framework\DataObject
         /*Added Condition : If token available need not to save the card details */
             if ($customerId && !(isset($paymentdetails['additional_data']['token'])
                 && !empty($paymentdetails['additional_data']['token']) )) {
-                $this->saveToken($customerId, $payment,$paymentDetails);
+                $this->saveToken($customerId, $payment, $paymentDetails);
             } elseif (!empty($this->customerSession->getVerifiedDetailedToken())
                     || (isset($paymentDetails['additional_data']['is_graphql'])
                         && !empty($paymentDetails['token_url']))) {
@@ -198,30 +198,30 @@ class DirectService extends \Magento\Framework\DataObject
         $this->_applyPaymentUpdate($directResponse, $payment);
     }
     
-    public function saveToken($customerId, $payment,$paymentDetails)
+    public function saveToken($customerId, $payment, $paymentDetails)
     {
         if (isset($paymentDetails['additional_data']['is_graphql'])) {
             if ($paymentDetails['additional_data']['save_card'] !=='1' && !empty($paymentDetails['token_url'])) {
-            if (!isset($paymentDetails['additional_data']['use_savedcard'])
+                if (!isset($paymentDetails['additional_data']['use_savedcard'])
                     && $this->worldpayHelper->checkIfTokenExists($paymentDetails['token_url'])) {
-                $this->wplogger->info(" User already has this card saved....");
-            }else {
-               $this->wplogger->info(
-                " Inititating Delete Token for Registered customer with customerID="
-                .$customerId." ...."
-            );
-               $this->paymentservicerequest->getTokenDelete($paymentDetails['token_url']); 
-            }
-            }else if (($paymentDetails['additional_data']['save_card'] =='1' && !empty($paymentDetails['token_url']))
+                    $this->wplogger->info(" User already has this card saved....");
+                } else {
+                    $this->wplogger->info(
+                        " Inititating Delete Token for Registered customer with customerID="
+                        .$customerId." ...."
+                    );
+                    $this->paymentservicerequest->getTokenDelete($paymentDetails['token_url']);
+                }
+            } elseif (($paymentDetails['additional_data']['save_card'] =='1' && !empty($paymentDetails['token_url']))
                     || ($this->customerSession->getIsSavedCardRequested())) {
                 $tokenFromcard = !empty($this->customerSession->getDetailedToken())?$this->customerSession->getDetailedToken():'';
                 $token = !empty($paymentDetails['token_url'])?$paymentDetails['token_url'] :$tokenFromcard['_links']['tokens:token']['href'] ;
                 $this->customerSession->unsIsSavedCardRequested();
                 $this->customerSession->unsDetailedToken();
-                $this->saveTokenForGraphQl($token,$customerId,$payment);
+                $this->saveTokenForGraphQl($token, $customerId, $payment);
             }
             
-        }elseif ($this->customerSession->getIsSavedCardRequested()) {
+        } elseif ($this->customerSession->getIsSavedCardRequested()) {
             $tokenDetailResponseToArray = $this->customerSession->getDetailedToken();
             $this->updateWorldPayPayment->create()->
                     saveVerifiedToken($tokenDetailResponseToArray, $payment);
@@ -248,16 +248,20 @@ class DirectService extends \Magento\Framework\DataObject
         }
     }
     
-    public function saveTokenForGraphQl ($token_url,$customerId,$payment)
+    public function saveTokenForGraphQl($token_url, $customerId, $payment)
     {
         $getTokenDetails = $this->paymentservicerequest->_getDetailedVerifiedToken(
-                $token_url, $this->worldpayHelper->getXmlUsername(), $this->worldpayHelper->getXmlPassword()
+            $token_url,
+            $this->worldpayHelper->getXmlUsername(),
+            $this->worldpayHelper->getXmlPassword()
         );
 
         $tokenDetailResponseToArray = json_decode($getTokenDetails, true);
         //make a call to getBrand Details,content-type is different
         $getTokenBrandDetails = $this->paymentservicerequest->getDetailedTokenForBrand(
-                $token_url, $this->worldpayHelper->getXmlUsername(), $this->worldpayHelper->getXmlPassword()
+            $token_url,
+            $this->worldpayHelper->getXmlUsername(),
+            $this->worldpayHelper->getXmlPassword()
         );
         $brandResponse = json_decode($getTokenBrandDetails, true);
         $tokenDetailResponseToArray['card_brand'] = $brandResponse['paymentInstrument']['brand'];

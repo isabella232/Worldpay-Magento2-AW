@@ -24,7 +24,7 @@ $storeCode = $block->getStoreCode();
                         control-select-new-card">
                     <option value="" selected="selected">
                     <?= /* @noEscape */ $block->getAccountLabelbyCode('AC12') ?
-                $block->getAccountLabelbyCode('AC12') : 'Credit Card Type' ?>
+                    $block->getAccountLabelbyCode('AC12') : 'Credit Card Type' ?>
                     </option>
                     <?php
                     $options = '';
@@ -45,7 +45,7 @@ $storeCode = $block->getStoreCode();
             <div class="control">
                 <input type="number" name="cardNumber" required='true' id="card_number" 
                       title="<?= /* @noEscape */ $block->getAccountLabelbyCode('AC3') ?
-                $block->getAccountLabelbyCode('AC3') : 'Card Number' ?>"
+                        $block->getAccountLabelbyCode('AC3') : 'Card Number' ?>"
                        class="input-text required validate-cc-number 
                        worldpay-cardnumber-valid">
             </div>
@@ -54,12 +54,12 @@ $storeCode = $block->getStoreCode();
         <div class="field card holder name">
             <label class="label" for="card holder name">
                  <span><?= /* @noEscape */ $block->getAccountLabelbyCode('AC1') ?
-                $block->getAccountLabelbyCode('AC1') : 'Card Holder Name' ?></span>
+                    $block->getAccountLabelbyCode('AC1') : 'Card Holder Name' ?></span>
             </label>
             <div class="control">
                 <input type="text" name="cardHolderName" required='true' id="card-holder-name" 
                        title="<?= /* @noEscape */ $block->getAccountLabelbyCode('AC1') ?
-                $block->getAccountLabelbyCode('AC1') : 'Card Holder Name' ?>"
+                        $block->getAccountLabelbyCode('AC1') : 'Card Holder Name' ?>"
                        class="input-text required cardholder_name worldpay-cardholdername-length">
             </div>
         </div>
@@ -102,7 +102,7 @@ $storeCode = $block->getStoreCode();
             <div class="field required _required cvv">
                 <label for="cvv" class="label">
                      <span><?= /* @noEscape */ $block->getAccountLabelbyCode('AC17') ?
-                $block->getAccountLabelbyCode('AC17') : 'CVV' ?></span>
+                        $block->getAccountLabelbyCode('AC17') : 'CVV' ?></span>
                 </label>
                 <div class="control">
                     <input type="number" autocomplete="off" length="4" id="cvv"
@@ -116,10 +116,10 @@ $storeCode = $block->getStoreCode();
         <?php endif; ?>
         <!-- Disclaimer -->
         <label for="save-card" class="label">
-          <?php if ($block->getDisclaimerMessageEnable()): ?> 
+            <?php if ($block->getDisclaimerMessageEnable()): ?> 
             <span>(<a href="javascript:void(0)" id="btnShow"><?= /* @noEscape */ $block->getAccountLabelbyCode('AC15') ?
                 $block->getAccountLabelbyCode('AC15') : 'Important Disclaimer!' ?></a>)</span>
-          <?php endif; ?>
+            <?php endif; ?>
         </label>
         <div title="<?= /* @noEscape */ $block->getAccountLabelbyCode('AC16') ?
                 $block->getAccountLabelbyCode('AC16') : 'Disclaimer!' ?>" id="dialog" style="display: none" align ="center" >
@@ -143,9 +143,9 @@ $storeCode = $block->getStoreCode();
                         onclick="javascript:onConfirmBtn(); return false;"
                         id ="save_newcard"
                         title="<?= /* @noEscape */ $block->getAccountLabelbyCode('AC13') ?
-                $block->getAccountLabelbyCode('AC13') : 'Save' ?>">
+                        $block->getAccountLabelbyCode('AC13') : 'Save' ?>">
                     <span><?= /* @noEscape */ $block->getAccountLabelbyCode('AC13') ?
-                $block->getAccountLabelbyCode('AC13') : 'Save' ?></span>
+                    $block->getAccountLabelbyCode('AC13') : 'Save' ?></span>
                 </button>
             </div>
         </div>

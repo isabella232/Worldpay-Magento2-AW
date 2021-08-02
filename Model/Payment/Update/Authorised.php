@@ -67,17 +67,18 @@ class Authorised extends Base implements Update
      * @return array
      */
     private function _getAllowedPaymentStatuses(\Sapient\AccessWorldpay\Model\Order $order)
-    {  if(!empty($order) && $order->hasWorldPayPayment()) {
-        if ($this->_isDirectIntegrationMode($order)) {
-             return [
+    {
+        if (!empty($order) && $order->hasWorldPayPayment()) {
+            if ($this->_isDirectIntegrationMode($order)) {
+                 return [
                 \Sapient\AccessWorldpay\Model\Payment\State::STATUS_SENT_FOR_AUTHORISATION,
                 \Sapient\AccessWorldpay\Model\Payment\State::STATUS_AUTHORISED
-             ];
+                 ];
+            }
+            return [\Sapient\AccessWorldpay\Model\Payment\State::STATUS_SENT_FOR_AUTHORISATION];
+        } else {
+            throw new \Magento\Framework\Exception\LocalizedException(__('No Payment'));
         }
-        return [\Sapient\AccessWorldpay\Model\Payment\State::STATUS_SENT_FOR_AUTHORISATION];
-      }else {
-          throw new \Magento\Framework\Exception\LocalizedException(__('No Payment'));
-      }
     }
 
     /**

@@ -33,9 +33,9 @@ class Refunded extends Base implements Update
         $reference = $this->_paymentState->getJournalReference(
             \Sapient\AccessWorldpay\Model\Payment\State::STATUS_REFUNDED
         );
-        if(isset($reference) && !empty($order)) {
-        $message = self::REFUND_COMMENT . ' Reference: ' . $reference;
-        $order->refund($reference, $message);
+        if (isset($reference) && !empty($order)) {
+            $message = self::REFUND_COMMENT . ' Reference: ' . $reference;
+            $order->refund($reference, $message);
         }
         $this->_worldPayPayment->updateAccessWorldpayPayment($this->_paymentState);
     }

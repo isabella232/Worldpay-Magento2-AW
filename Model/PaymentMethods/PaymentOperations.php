@@ -2,10 +2,10 @@
 
 namespace Sapient\AccessWorldpay\Model\PaymentMethods;
 
-class PaymentOperations extends \Sapient\AccessWorldpay\Model\PaymentMethods\AbstractMethod 
+class PaymentOperations extends \Sapient\AccessWorldpay\Model\PaymentMethods\AbstractMethod
 {
 
-    public function updateOrderStatus($order) 
+    public function updateOrderStatus($order)
     {
         if (!empty($order)) {
             $payment = $order->getPayment();
@@ -26,7 +26,7 @@ class PaymentOperations extends \Sapient\AccessWorldpay\Model\PaymentMethods\Abs
         }
     }
 
-    public function updateOrder($paymentStatus, $mageOrder) 
+    public function updateOrder($paymentStatus, $mageOrder)
     {
         switch ($paymentStatus) {
             case 'SENT_FOR_SETTLEMENT':
@@ -63,5 +63,4 @@ class PaymentOperations extends \Sapient\AccessWorldpay\Model\PaymentMethods\Abs
                 break;
         }
     }
-
 }

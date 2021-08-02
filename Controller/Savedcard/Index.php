@@ -26,17 +26,17 @@ class Index extends \Magento\Framework\App\Action\Action
      * @param \Magento\Framework\View\Result\PageFactory $resultPageFactory
      * @param \Magento\Customer\Model\Session $customerSession
      * @param \Sapient\AccessWorldpay\Helper\Data $worldpayHelper
-     */	 
-	public function __construct(
-		Context $context,
-		\Magento\Framework\View\Result\PageFactory $resultPageFactory,
-		\Magento\Customer\Model\Session $customerSession,
-                \Sapient\AccessWorldpay\Helper\Data $worldpayHelper
-	) {
+     */
+    public function __construct(
+        Context $context,
+        \Magento\Framework\View\Result\PageFactory $resultPageFactory,
+        \Magento\Customer\Model\Session $customerSession,
+        \Sapient\AccessWorldpay\Helper\Data $worldpayHelper
+    ) {
         parent::__construct($context);
         $this->_resultPageFactory = $resultPageFactory;
         $this->customerSession = $customerSession;
-        $this->worldpayHelper = $worldpayHelper;        
+        $this->worldpayHelper = $worldpayHelper;
     }
 
     /**

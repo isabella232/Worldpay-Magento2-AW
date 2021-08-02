@@ -31,7 +31,7 @@ class Edit extends \Magento\Framework\App\Action\Action
      * @param PageFactory $resultPageFactory
      * @param SavedTokenFactory $savecard
      * @param \Sapient\AccessWorldpay\Helper\Data $worldpayHelper
-     * @param Session $customerSession         
+     * @param Session $customerSession
      */
     public function __construct(
         Context $context,
